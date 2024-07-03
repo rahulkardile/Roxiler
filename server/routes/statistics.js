@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/get", async (req, res, next) => {
     try {
         let { search } = req.query;
-        let price = req.query.price;
+        let price = Number(req.query.price);
         let page = Number(req.query.page);
 
         if (search === undefined) {
@@ -32,8 +32,7 @@ router.get("/get", async (req, res, next) => {
         const data = await Product.find({
             $or: [
                 { title: { $regex: search, $options: "i" } },
-                { description: { $regex: search, $options: "i" } },
-                { price: { $regex: price } }
+                { description: { $regex: search, $options: "i" } }
             ]
         }).limit(limit).skip(skip).sort({ price: -1 })
 
