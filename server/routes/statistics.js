@@ -31,7 +31,6 @@ router.get("/get", async (req, res, next) => {
         console.log();
         const data = await Product.find({
             $or: [
-                { price: { $gte: price } },
                 { title: { $regex: search, $options: "i" } },
                 { description: { $regex: search, $options: "i" } },
             ]

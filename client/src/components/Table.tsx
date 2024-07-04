@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { Product } from '../utils/Types';
 
-const Table = () => {
+interface TableProps {
+    data: Product[];
+  }
+
+const Table: FC<TableProps> = ({ data }) => {
+
     return (
         <main className='m-auto w-[75%] rounded-xl'>
             <div className="my-2">
@@ -17,26 +23,31 @@ const Table = () => {
                     </thead>
                     <tbody className='w-full'>
 
-                        <tr className="border-b dark:border-neutral-500">
-                            <td className="whitespace-nowrap border-x px-6 py-4 dark:border-neutral-500">
-                                ransaction.title
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                transaction.description
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                transaction.price
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                transaction.dateOfSale
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                transaction.category
-                            </td>
-                            <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                transaction.sold
-                            </td>
-                        </tr>
+                        {
+                           data.length >= 0 ? data.map((item, index) => (
+                                <tr className="border-b dark:border-neutral-500" key={index}>
+                                    <td className="whitespace-nowrap border-x px-6 py-4 dark:border-neutral-500">
+                                        { item.title.length >= 15 ? item.title.substring(0, 15) + " . . ." : item.title}
+                                    </td>
+                                    <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                    { item.description.length >= 15 ? item.description.substring(0, 15) + " . . ." : item.description}
+                                    </td>
+                                    <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        {item.price}
+                                    </td>
+                                    <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        {item.dateOfSale}
+                                    </td>
+                                    <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        {item.category}
+                                    </td>
+                                    <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        {item.sold}
+                                    </td>
+                                </tr>
+                            )) : ""
+                        }
+
 
                     </tbody>
                 </table>
@@ -46,46 +57,4 @@ const Table = () => {
     )
 }
 
-export default Table
-
-
-{/* <table className='table p-3 max-w-7xl'>
-<thead className=''>
-    <th>id</th>
-    <th>title</th>
-    <th>description</th>
-    <th>price</th>
-    <th>category</th>
-    <th>sold</th>
-    <th>image</th>
-</thead>
-<tbody className=''>
-    <tr className='mx-4 p-10'>
-        <td>1</td>
-        <td>test</td>
-        <td>Lorem ipsum commodi nesciunt consequatur provident corporis unde</td>
-        <td>$32</td>
-        <td>Game</td>
-        <td>Not Sold</td>
-        <td>img</td>
-    </tr>
-    <tr className='mx-4 p-10'>
-        <td>1</td>
-        <td>test</td>
-        <td>Lorem ipsum commodi nesciunt consequatur provident corporis unde</td>
-        <td>$32</td>
-        <td>Game</td>
-        <td>Not Sold</td>
-        <td>img</td>
-    </tr>
-    <tr className='mx-4 p-10'>
-        <td>1</td>
-        <td>test</td>
-        <td>Lorem ipsum commodi nesciunt consequatur provident corporis unde</td>
-        <td>$32</td>
-        <td>Game</td>
-        <td>Not Sold</td>
-        <td>img</td>
-    </tr>
-</tbody>
-</table> */}
+export default Table;
