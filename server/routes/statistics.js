@@ -111,13 +111,11 @@ router.get("/bar-chart", async (req, res, next) => {
         ]
         const queryMonthIndex = monthNames.indexOf(queryMonth);
 
-        console.log({ queryMonthIndex, queryMonth });
-
         if (queryMonthIndex === -1) {
             next(ErrorHandler("Invalid Month", 403));
         }
 
-        let ProductCount = [];
+        let productCount = [];
 
         const countPromises = priceArray.map(async (price, index) => {
             const Count = await Product.countDocuments({
@@ -127,17 +125,14 @@ router.get("/bar-chart", async (req, res, next) => {
                     $eq: [{ $month: "$dateOfSale" }, queryMonthIndex + 1]
                 }
             })
-
-            const name = price.min + " to " + price.max
-
-            ProductCount[index] = { range: `${price.min} to ${price.max}`, Count };
+            productCount[index] = { range: `${price.min} to ${price.max}`, Count };
         })
 
         await Promise.all(countPromises);
 
         res.status(200).json({
             success: true,
-            ProductCount
+            productCount
         })
 
     } catch (error) {
@@ -146,29 +141,3 @@ router.get("/bar-chart", async (req, res, next) => {
 });
 
 export default router;
-
-// const ZeroToHundred = await Product.countDocuments({ dateOfSale: {}, price: { $gte: 0, $lt: 100 } });
-// const hundred_to_two_hundred = await Product.countDocuments({ price: { $gte: 100, $lt: 200 } });
-// const TwoHundred_to_ThreeHundred = await Product.countDocuments({ price: { $gte: 200, $lt: 300 } });
-// const ThreeHundred_to_FourHundred = await Product.countDocuments({ price: { $gte: 300, $lt: 400 } });
-// const FourHundred_to_FiveHundred = await Product.countDocuments({ price: { $gte: 400, $lt: 500 } });
-// const FiveHundred_to_SixHundred = await Product.countDocuments({ price: { $gte: 500, $lt: 600 } });
-// const SixHundred_to_SevenHundred = await Product.countDocuments({ price: { $gte: 600, $lt: 700 } });
-// const SevenHundred_to_EightHundred = await Product.countDocuments({ price: { $gte: 700, $lt: 800 } });
-// const EightHundred_to_NineHundred = await Product.countDocuments({ price: { $gte: 800, $lt: 900 } });
-// const Above_NineHundred = await Product.countDocuments({ price: { $gte: 900 } });
-
-// const data = {
-//     '0-100': ZeroToHundred,
-//     '100-200': hundred_to_two_hundred,
-//     '200-300': TwoHundred_to_ThreeHundred,
-//     '300-400': ThreeHundred_to_FourHundred,
-//     '400-500': FourHundred_to_FiveHundred,
-//     '500-600': FiveHundred_to_SixHundred,
-//     '600-700': SixHundred_to_SevenHundred,
-//     '700-800': SevenHundred_to_EightHundred,
-//     '800-900': EightHundred_to_NineHundred,
-//     'above-900': Above_NineHundred,
-// }
-// const totalCount = await Product.countDocuments();
-// const total = ZeroToHundred + hundred_to_two_hundred + TwoHundred_to_ThreeHundred + ThreeHundred_to_FourHundred + FourHundred_to_FiveHundred + FiveHundred_to_SixHundred + SixHundred_to_SevenHundred + SevenHundred_to_EightHundred + EightHundred_to_NineHundred + Above_NineHundred;
