@@ -42,7 +42,7 @@ const Table: FC<TableProps> = ({ data }) => {
                                         {item.category}
                                     </td>
                                     <td className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                        {item.sold}
+                                        {item.sold ? "Yes" : "No"}
                                     </td>
                                 </tr>
                             )) : ""

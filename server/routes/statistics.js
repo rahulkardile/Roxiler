@@ -50,13 +50,11 @@ router.get("/get", async (req, res, next) => {
 router.get("/stat", async (req, res, next) => {
     try {
 
-        const { month, range } = req.query;
+        const { month } = req.query;
         const data = await Product.find();
         let totalSales = 0;
         let totalItems = 0;
         let totalNotSold = 0;
-
-        let RangeObj = new Object();
 
         data.map(async (item, index) => {
             const date = item.dateOfSale;
@@ -75,14 +73,11 @@ router.get("/stat", async (req, res, next) => {
 
         return res.status(201).json({
             success: true,
-            status: 201,
-            query: month,
             data: {
                 totalItems,
                 totalSales,
                 totalNotSold
             },
-            range: RangeObj
         })
 
     } catch (error) {

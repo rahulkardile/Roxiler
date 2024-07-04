@@ -10,3 +10,14 @@ export interface Product {
     dateOfSale: string;
     __v: number;
   }
+
+ export interface StatisticsInterface {
+    totalItems: number;
+    totalSales: number;
+    totalNotSold: number;
+  }
+
+ export interface ApiResponseStatistics {
+    data: StatisticsInterface;
+    success: boolean;
+  }
