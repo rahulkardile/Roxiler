@@ -107,7 +107,6 @@ router.get("/bar-chart", async (req, res, next) => {
             { min: 700, max: 800 },
             { min: 800, max: 900 },
             { min: 900 }
-
         ]
         const queryMonthIndex = monthNames.indexOf(queryMonth);
 
