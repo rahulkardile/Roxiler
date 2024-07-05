@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import {
     BarChart,
     Bar,
@@ -42,8 +42,8 @@ const Bar_Chart: FC<productcouts> = ({ productCount }) => {
     return (
         <BarChart
             width={1150}
-            className='p-1 bg-white border rounded-lg'
-            height={400}
+            className=' py-3 bg-white border rounded-lg'
+            height={420}
             data={data}
             margin={{
                 top: 5,

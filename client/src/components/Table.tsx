@@ -8,9 +8,9 @@ interface TableProps {
 const Table: FC<TableProps> = ({ data }) => {
 
     return (
-        <main className='m-auto w-screen rounded-xl'>
-            <div className="my-2 m-auto w-10/12">
-                <table className="border-collapse border-3 overflow-x-auto rounded-lg border-slate-500 bg-orange-200 w-full">
+        <main className='m-auto w-min'>
+            <div className="m-auto">
+                <table className="border-collapse border-3 overflow-x-auto border-slate-500 bg-orange-200 w-full">
                     <thead>
                         <tr>
                             <th className="border px-6 py-4 dark:border-neutral-500">Id</th>

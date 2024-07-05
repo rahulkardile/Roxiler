@@ -80,12 +80,12 @@ function App() {
   }, [month])
 
   return (
-    <div className="bg-sky-100 p-8 m-auto h-full">
+    <div className="bg-sky-100 w-screen p-8 m-auto h-full">
       <h2 className="w-[150px] h-[150px] text-lg font-bold flex items-center justify-center rounded-full text-center text-gray-600 bg-white m-auto">Transaction Dashboard</h2>
       <div className="w-screen">
-        <div className="max-w-[70%] mx-auto my-4 h-12 flex flex-row justify-between px-11">
-          <input type="text" value={search} className="w-[30%]  bg-orange-200 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
-          <select value={month} className="bg-orange-200 rounded-md w-32 px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
+        <div className="max-w-[90%] mx-auto my-4 h-12 flex flex-row justify-between px-11">
+          <input type="text" value={search} className="w-[20%]  bg-orange-200 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
+          <select value={month} className="bg-orange-200 rounded-md w-[14%] px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
             <option className="p-3" value="Jan">January</option>
             <option className="p-3" value="Feb">February</option>
             <option className="p-3" value="Mar">March</option>
