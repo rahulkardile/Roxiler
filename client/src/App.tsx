@@ -44,7 +44,7 @@ function App() {
 
   }
 
-  async function getGraphData(){
+  async function getGraphData() {
     const res = await fetch(`/api/state/bar-chart?month=${month}`)
     const { productCount: counts, success }: ResponseAPIGraph = await res.json();
 
@@ -57,11 +57,9 @@ function App() {
 
   useEffect(() => {
     GetData();
-
-    if (ProductData.length < 9) {
+    if (search) {
       setPage(1);
     }
-
   }, [search, page])
 
   useEffect(() => {
@@ -72,26 +70,24 @@ function App() {
   return (
     <div className="bg-sky-100 p-8 m-auto h-full">
       <h2 className="w-[150px] h-[150px] text-lg font-bold flex items-center justify-center rounded-full text-center text-gray-600 bg-white m-auto">Transaction Dashboard</h2>
-
-      <div className="max-w-screen-lg mx-auto my-4 h-12 flex flex-row justify-between px-11">
-
-        <input type="text" value={search} className="w-[30%]  bg-orange-200 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
-
-        <select value={month} className="bg-orange-200 rounded-md w-32 px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
-          <option className="p-3" value="Jan">January</option>
-          <option className="p-3" value="Feb">February</option>
-          <option className="p-3" value="Mar">March</option>
-          <option className="p-3" value="Apr">April</option>
-          <option className="p-3" value="May">May</option>
-          <option className="p-3" value="Jun">June</option>
-          <option className="p-3" value="Jul">July</option>
-          <option className="p-3" value="Aug">August</option>
-          <option className="p-3" value="Sep">September</option>
-          <option className="p-3" value="Oct">October</option>
-          <option className="p-3" value="Nov">November</option>
-          <option className="p-3" value="Dec">December</option>
-        </select>
-
+      <div className="w-screen">
+        <div className="max-w-[70%] mx-auto my-4 h-12 flex flex-row justify-between px-11">
+          <input type="text" value={search} className="w-[30%]  bg-orange-200 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
+          <select value={month} className="bg-orange-200 rounded-md w-32 px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
+            <option className="p-3" value="Jan">January</option>
+            <option className="p-3" value="Feb">February</option>
+            <option className="p-3" value="Mar">March</option>
+            <option className="p-3" value="Apr">April</option>
+            <option className="p-3" value="May">May</option>
+            <option className="p-3" value="Jun">June</option>
+            <option className="p-3" value="Jul">July</option>
+            <option className="p-3" value="Aug">August</option>
+            <option className="p-3" value="Sep">September</option>
+            <option className="p-3" value="Oct">October</option>
+            <option className="p-3" value="Nov">November</option>
+            <option className="p-3" value="Dec">December</option>
+          </select>
+        </div>
       </div>
       <Table data={ProductData} />
       <div className="max-w-screen-lg font-semibold mx-auto my-9 flex flex-row justify-between">

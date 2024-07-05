@@ -12,48 +12,12 @@ import { Graph, ProductCount } from '../utils/Types';
 
 const Bar_Data: Graph[] = [
     {
-        name: "Page A",
+        name: "Zero to 900",
         uv: 4000,
         count: 2400,
         amt: 2400
-    },
-    {
-        name: "Page B",
-        uv: 3000,
-        count: 1398,
-        amt: 2210
-    },
-    {
-        name: "Page C",
-        uv: 2000,
-        count: 9800,
-        amt: 2290
-    },
-    {
-        name: "Page D",
-        uv: 2780,
-        count: 3908,
-        amt: 2000
-    },
-    {
-        name: "Page E",
-        uv: 1890,
-        count: 4800,
-        amt: 2181
-    },
-    {
-        name: "Page F",
-        uv: 2390,
-        count: 3800,
-        amt: 2500
-    },
-    {
-        name: "Page G",
-        uv: 3490,
-        count: 4300,
-        amt: 2100
     }
-];
+    ];
 
 interface productcouts {
     productCount: ProductCount[]
@@ -80,7 +44,7 @@ const Bar_Chart: FC<productcouts> = ({ productCount }) => {
 
     return (
         <BarChart
-            width={900}
+            width={1150}
             className='p-1 bg-white border rounded-lg'
             height={400}
             data={data}
