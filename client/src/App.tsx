@@ -3,18 +3,20 @@ import Statistics from "./components/Statistics"
 import Table from "./components/Table"
 import { ApiResponseStatistics, Product, ProductCount, ResponseAPIGraph, StatisticsInterface } from "./utils/Types";
 import Bar_Chart from "./components/Bar_Chart";
+import { GetMonth } from "./utils/getMonth";
 
 interface ApiResponse {
   success: boolean;
   data: Product[];
+  count: number
 }
 
 function App() {
-
+  const [mainMonth, setMainMonth] = useState<string>("")
   const [month, setMonth] = useState("Mar");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-
+  const [totalPageCount, setTotalPageCount] = useState<number>()
   const [ProductData, setProductData] = useState<Product[]>([])
   const [StatisticData, setStatisticsData] = useState<StatisticsInterface>();
   const [productsCount, setProductCount] = useState<ProductCount[]>();
@@ -22,10 +24,11 @@ function App() {
 
   async function GetData() {
     const data = await fetch(`/api/state/get?search=${search}&page=${page}`)
-    const { data: res, success }: ApiResponse = await data.json();
+    const { data: res, success, count }: ApiResponse = await data.json();
 
     if (success === true) {
       setProductData(res)
+      setTotalPageCount(count);
     } else {
       console.log("Could not fetch data!");
     }
@@ -49,7 +52,9 @@ function App() {
     const { productCount: counts, success }: ResponseAPIGraph = await res.json();
 
     if (success === true && counts !== undefined) {
-      setProductCount(counts)
+      setProductCount(counts);
+      setMainMonth(GetMonth(month));
+
     } else {
       console.log("Could not fetch data!");
     }
@@ -58,7 +63,14 @@ function App() {
   useEffect(() => {
     GetData();
     if (search) {
-      setPage(1);
+      const pages = (totalPageCount !== undefined ? totalPageCount : 0) / 10;
+
+      console.log(pages);
+      if (pages > 1) {
+        return;
+      } else {
+        setPage(1);
+      }
     }
   }, [search, page])
 
@@ -100,12 +112,12 @@ function App() {
         <h4>Per Page : 10</h4>
       </div>
 
-      <Statistics month={month} data={StatisticData !== undefined ? StatisticData : { totalItems: 0, totalNotSold: 0, totalSales: 0 }} />
+      <Statistics month={mainMonth} data={StatisticData !== undefined ? StatisticData : { totalItems: 0, totalNotSold: 0, totalSales: 0 }} />
 
       <div className="w-full max-h-max flex flex-col justify-center items-start p-4 gap-9">
 
         <div className="pt-6">
-          <h3 className='font-bold text-xl'>Statistics - {month}</h3>
+          <h3 className='font-bold text-xl'>Bar Char Stats - {mainMonth}</h3>
           <span className='text-xs'>{"( Select Month From Dropdown )"}</span>
         </div>
 

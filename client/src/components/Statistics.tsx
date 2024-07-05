@@ -6,55 +6,12 @@ interface Stat {
     month: string
 }
 
-const Statistics: FC<Stat> = ( { data, month }) => {
-    let CurrentMonth = "";
-   
-    switch (month) {
-        case "Jan":
-            CurrentMonth = "January";
-            break;
-        case "Feb":
-            CurrentMonth = "February";
-            break;
-        case "Mar":
-            CurrentMonth = "March";
-            break;
-        case "Apr":
-            CurrentMonth = "April";
-            break;
-        case "May":
-            CurrentMonth = "May";
-            break;
-        case "Jun":
-            CurrentMonth = "June";
-            break;
-        case "Jul":
-            CurrentMonth = "July";
-            break;
-        case "Aug":
-            CurrentMonth = "August";
-            break;
-        case "Sep":
-            CurrentMonth = "September";
-            break;
-        case "Oct":
-            CurrentMonth = "October";
-            break;
-        case "Nov":
-            CurrentMonth = "November";
-            break;
-        case "Dec":
-            CurrentMonth = "December";
-            break;
-        default:
-            CurrentMonth = "Invalid month";
-            break;
-    }
+const Statistics: FC<Stat> = ({ data, month }) => {
 
     return (
         <main className="w-[20%] flex flex-col gap-6 p-5">
             <div className="">
-                <h3 className='font-bold text-xl'>Statistics - {CurrentMonth}</h3>
+                <h3 className='font-bold text-xl'>Statistics - {month}</h3>
                 <span className='text-xs'>{"( Select Month From Dropdown )"}</span>
             </div>
 

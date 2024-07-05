@@ -26,9 +26,6 @@ router.get("/get", async (req, res, next) => {
         const limit = 10;
         const skip = (page - 1) * limit;
 
-        console.log({ search, page, price });
-
-        console.log();
         const data = await Product.find({
             $or: [
                 { title: { $regex: search, $options: "i" } },
@@ -36,8 +33,16 @@ router.get("/get", async (req, res, next) => {
             ]
         }).limit(limit).skip(skip).sort({ price: -1 })
 
+        const count = await Product.countDocuments({
+            $or: [
+                { title: { $regex: search, $options: "i" } },
+                { description: { $regex: search, $options: "i" } },
+            ]
+        })
+
         res.status(200).json({
             success: true,
+            count,
             data
         });
 

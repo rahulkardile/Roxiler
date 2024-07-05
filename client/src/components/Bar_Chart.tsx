@@ -17,7 +17,7 @@ const Bar_Data: Graph[] = [
         count: 2400,
         amt: 2400
     }
-    ];
+];
 
 interface productcouts {
     productCount: ProductCount[]
@@ -30,16 +30,13 @@ const Bar_Chart: FC<productcouts> = ({ productCount }) => {
     useEffect(() => {
         const arr: Graph[] = [];
         productCount.map((item) => {
-            if(item.range === '900 to undefined'){
+            if (item.range === '900 to undefined') {
                 arr.push({ name: "above 900", count: item.Count, amt: 900, uv: 1000 })
-            }else{
+            } else {
                 arr.push({ name: item.range, count: item.Count, amt: 900, uv: 1000 })
             }
         })
-
         setData(arr);
-        console.log(data);
-
     }, [productCount])
 
     return (
