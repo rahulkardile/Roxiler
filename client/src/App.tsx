@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import Statistics from "./components/Statistics"
 import Table from "./components/Table"
-import { ApiResponseStatistics, Product, StatisticsInterface } from "./utils/Types";
+import { ApiResponseStatistics, Product, ProductCount, ResponseAPIGraph, StatisticsInterface } from "./utils/Types";
+import Bar_Chart from "./components/Bar_Chart";
 
 interface ApiResponse {
   success: boolean;
@@ -16,6 +17,7 @@ function App() {
 
   const [ProductData, setProductData] = useState<Product[]>([])
   const [StatisticData, setStatisticsData] = useState<StatisticsInterface>();
+  const [productsCount, setProductCount] = useState<ProductCount[]>();
 
 
   async function GetData() {
@@ -30,7 +32,7 @@ function App() {
 
   }
 
-  async function DataStatistics() {
+  async function dataStatistics() {
     const res = await fetch(`/api/state/stat?month=${month}`)
     const { data: statData, success }: ApiResponseStatistics = await res.json();
 
@@ -42,17 +44,29 @@ function App() {
 
   }
 
+  async function getGraphData(){
+    const res = await fetch(`/api/state/bar-chart?month=${month}`)
+    const { productCount: counts, success }: ResponseAPIGraph = await res.json();
+
+    if (success === true && counts !== undefined) {
+      setProductCount(counts)
+    } else {
+      console.log("Could not fetch data!");
+    }
+  }
+
   useEffect(() => {
     GetData();
 
-      if (ProductData.length < 9) {
-        setPage(1);
-      }
-  
-    }, [search, page])
+    if (ProductData.length < 9) {
+      setPage(1);
+    }
+
+  }, [search, page])
 
   useEffect(() => {
-    DataStatistics();
+    dataStatistics();
+    getGraphData();
   }, [month])
 
   return (
@@ -91,6 +105,18 @@ function App() {
       </div>
 
       <Statistics month={month} data={StatisticData !== undefined ? StatisticData : { totalItems: 0, totalNotSold: 0, totalSales: 0 }} />
+
+      <div className="w-full max-h-max flex flex-col justify-center items-start p-4 gap-9">
+
+        <div className="pt-6">
+          <h3 className='font-bold text-xl'>Statistics - {month}</h3>
+          <span className='text-xs'>{"( Select Month From Dropdown )"}</span>
+        </div>
+
+        <Bar_Chart productCount={productsCount !== undefined ? productsCount : []} />
+
+      </div>
+
     </div>
   )
 }
