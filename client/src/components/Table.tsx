@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Product } from '../utils/Types';
 
 interface TableProps {

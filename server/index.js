@@ -3,8 +3,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { GetData } from "./utils/AddProducts.js";
 import stat from "./routes/statistics.js"
+import path from 'path';
 
 const app = express();
+const __dirname = path.resolve();
 
 dotenv.config();
 const API_Url = process.env.api;
@@ -17,15 +19,20 @@ try {
 } catch (error) {
     console.log("DataBase is Not Connected");
 }
-
 app.use("/api/state", stat);
 
-app.use("*", (req, res, next) => {
+app.use("/api/*", (req, res, next) => {
     res.status(404).json({
         success: true,
         status: 404,
         message: "Not found!"
     })
+})
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 })
 
 app.use((err, req, res, next) => {

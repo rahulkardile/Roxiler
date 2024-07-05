@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { StatisticsInterface } from '../utils/Types'
 
 interface Stat {
