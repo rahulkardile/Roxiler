@@ -80,12 +80,12 @@ function App() {
   }, [month])
 
   return (
-    <div className="bg-sky-100 w-screen p-8 m-auto h-full">
+    <div className="bg-sky-100 w-screen portrait:p-0 p-8 m-auto h-full">
       <h2 className="w-[150px] h-[150px] text-lg font-bold flex items-center justify-center rounded-full text-center text-gray-600 bg-white m-auto">Transaction Dashboard</h2>
       <div className="w-screen">
-        <div className="max-w-[90%] mx-auto my-4 h-12 flex flex-row justify-between px-11">
-          <input type="text" value={search} className="w-[20%]  bg-orange-200 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
-          <select value={month} className="bg-orange-200 rounded-md w-[14%] px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
+        <div className="max-w-[90%] mx-auto my-4 h-12 flex flex-row justify-between portrait:px-3 px-11">
+          <input type="text" value={search} className="w-[20%] portrait:w-36 bg-orange-200 text-xs portrait:px-2 portrait:py-0 text-neutral-900 font-semibold rounded-md px-4 py-1 outline-none" placeholder="Search Transaction" onChange={(e) => { setSearch(e.target.value) }} />
+          <select value={month} className="bg-orange-200 rounded-md w-[14%] portrait:w-24 px-2 h-[90%]" onChange={(e) => setMonth(e.target.value)} defaultValue={"mar"} name="month" id="month">
             <option className="p-3" value="Jan">January</option>
             <option className="p-3" value="Feb">February</option>
             <option className="p-3" value="Mar">March</option>
@@ -101,7 +101,9 @@ function App() {
           </select>
         </div>
       </div>
-      <Table data={ProductData} />
+      <div className="">
+        <Table data={ProductData} />
+      </div>
       <div className="max-w-screen-lg font-semibold mx-auto my-9 flex flex-row justify-between">
         <h4>Page No: {page}</h4>
         <div className="flex gap-3">
@@ -114,14 +116,16 @@ function App() {
 
       <Statistics month={mainMonth} data={StatisticData !== undefined ? StatisticData : { totalItems: 0, totalNotSold: 0, totalSales: 0 }} />
 
-      <div className="w-full max-h-max flex flex-col justify-center items-start p-4 gap-9">
+      <div className="w-full max-h-max flex flex-col justify-center items-start p-4 portrait:gap-2 gap-9">
 
         <div className="pt-6">
           <h3 className='font-bold text-xl'>Bar Char Stats - {mainMonth}</h3>
           <span className='text-xs'>{"( Select Month From Dropdown )"}</span>
         </div>
 
-        <Bar_Chart productCount={productsCount !== undefined ? productsCount : []} />
+        <div className="portrait:scale-50 bg-red-200">
+          <Bar_Chart productCount={productsCount !== undefined ? productsCount : []} />
+        </div>
 
       </div>
 

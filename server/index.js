@@ -19,6 +19,7 @@ try {
 } catch (error) {
     console.log("DataBase is Not Connected");
 }
+
 app.use("/api/state", stat);
 
 app.use("/api/*", (req, res, next) => {
@@ -32,7 +33,7 @@ app.use("/api/*", (req, res, next) => {
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
 app.use((err, req, res, next) => {
@@ -50,3 +51,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`server is running at ${PORT} . . .`);
 })
+

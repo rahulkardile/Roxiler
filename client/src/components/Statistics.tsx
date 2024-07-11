@@ -9,7 +9,7 @@ interface Stat {
 const Statistics: FC<Stat> = ({ data, month }) => {
 
     return (
-        <main className="w-[20%] flex flex-col gap-6 p-5">
+        <main className="w-[20%] portrait:w-48 flex flex-col gap-6 p-5">
             <div className="">
                 <h3 className='font-bold text-xl'>Statistics - {month}</h3>
                 <span className='text-xs'>{"( Select Month From Dropdown )"}</span>

@@ -42,7 +42,7 @@ const Bar_Chart: FC<productcouts> = ({ productCount }) => {
     return (
         <BarChart
             width={1150}
-            className=' py-3 bg-white border rounded-lg'
+            className='portrait:-mx-96 portrait:-my-32 portrait:scale-75 py-3 bg-white border rounded-lg'
             height={420}
             data={data}
             margin={{
