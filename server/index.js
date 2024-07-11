@@ -45,7 +45,6 @@ app.use((err, req, res, next) => {
         statusCode,
         message
     });
-
 })
 
 app.listen(PORT, () => {
