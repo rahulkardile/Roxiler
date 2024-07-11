@@ -104,14 +104,14 @@ function App() {
       <div className="">
         <Table data={ProductData} />
       </div>
-      <div className="max-w-screen-lg font-semibold mx-auto my-9 flex flex-row justify-between">
-        <h4>Page No: {page}</h4>
+      <div className="max-w-screen-lg font-semibold mx-auto my-9 flex flex-row portrait:px-8 px-2 justify-between">
+        <h4 className="text-sm">Page No: {page}</h4>
         <div className="flex gap-3">
           <button disabled={page === 1 ? true : false} className="disabled:cursor-not-allowed disabled:text-gray-400" onClick={() => setPage(page - 1)}>Previous</button>
           <span>-</span>
           <button disabled={ProductData.length < 9} className="disabled:cursor-not-allowed disabled:text-gray-400" onClick={() => setPage(page + 1)}>Next</button>
         </div>
-        <h4>Per Page : 10</h4>
+        <h4 className="text-sm">Per Page : 10</h4>
       </div>
 
       <Statistics month={mainMonth} data={StatisticData !== undefined ? StatisticData : { totalItems: 0, totalNotSold: 0, totalSales: 0 }} />
