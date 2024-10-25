@@ -30,6 +30,15 @@ app.use("/api/*", (req, res, next) => {
     })
 })
 
+app.get("/create", async(req, res, next)=> {
+    // await GetData(API_Url);
+
+    res.status(201).json({
+        success: true,
+        message: "Data insertion is desabled."
+    })
+})
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
